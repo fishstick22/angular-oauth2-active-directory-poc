@@ -29,13 +29,22 @@
 <button class="btn btn-lg btn-outline-primary" (click)="openLoginModal(login)">login</button>
 </div>
 <hr>
-<pre>
-  {{closeResult}}<br > credentials: {{creds|json}} <br >
-  <span *ngIf="authService.authenticated">
-    Authenticated!<br >
-    Token: {{authService.getToken()}}
-  </span>
-</pre>
+<div class="card mb-3" style="max-width: 40rem;"
+    [ngClass]="{'border-danger' : !authService.authenticated, 'border-success' : authService.authenticated}">
+    <div class="card-header" *ngIf="!authService.authenticated" class="text-center bg-danger">NOT Logged In!</div>
+    <div class="card-header" *ngIf="authService.authenticated" class="text-center bg-success">Logged In</div>
+    <div class="card-block">
+      <div class="card-body">
+          <pre>
+              {{closeResult}}<br > credentials: {{creds|json}} <br >
+          </pre>
+          <span *ngIf="authService.authenticated">
+            Token: {{authService.getToken()}}
+          </span>
+      </div>
+    </div>
+  </div>
+
 <hr >
 <h4>Here are some links to help you start: </h4>
 <ul>
